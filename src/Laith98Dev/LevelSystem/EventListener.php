@@ -112,7 +112,7 @@ class EventListener implements Listener
 	public function onPlace(BlockPlaceEvent $event): void
 	{
 		$player = $event->getPlayer();
-		$block = $event->getBlock();
+		$block = $event->getBlockAgainst();
 		if($event->isCancelled())
 			return;
 		
@@ -137,7 +137,7 @@ class EventListener implements Listener
 	public function onBreak(BlockBreakEvent $event): void
 	{
 		$player = $event->getPlayer();
-		$block = $event->getBlock();
+		$block = $event->getInstaBreak();
 		if($event->isCancelled())
 			return;
 		
