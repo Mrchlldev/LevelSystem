@@ -137,7 +137,7 @@ class EventListener implements Listener
 	public function onBreak(BlockBreakEvent $event): void
 	{
 		$player = $event->getPlayer();
-		$block = $event->getInstaBreak();
+		$block = $event->getBlock();
 		if($event->isCancelled())
 			return;
 		
