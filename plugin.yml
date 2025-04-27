@@ -1,0 +1,11 @@
+name: LevelSystem
+api: 5.0.0
+main: Mrchlldev\LevelSystem\LevelSystem
+src-namespace-prefix: Mrchlldev\LevelSystem
+author: Mrchlldev
+version: 1.0.0
+
+permissions:
+  levelsystem.command.level:
+    description: "Allow to use /level command"
+    default: true
