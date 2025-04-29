@@ -4,6 +4,7 @@ namespace Mrchlldev\LevelSystem;
 
 use Mrchlldev\LevelSystem\command\LevelCommand;
 use Mrchlldev\LevelSystem\manager\LevelManager;
+use Mrchlldev\LevelSystem\manager\FormManager;
 use IvanCraft623\RankSystem\tag\Tag;
 use IvanCraft623\RankSystem\tag\TagManager;
 use IvanCraft623\RankSystem\session\Session;
@@ -47,11 +48,13 @@ class LevelSystem extends PluginBase {
                 return;
             }
         }
+        if (!PacketHooker::isRegistered($this)) PacketHooker::register($this);
         $this->registerRankSystemTag();
         $this->loadScoreHud();
         (new LevelManager($this));
+        (new FormManager($this));
         $this->getServer()->getPluginManager()->registerEvents(new EventListener($this), $this);
-        $this->getServer()->getCommandMap()->register(new LevelCommand($this, "level", "Get player level information"));
+        $this->getServer()->getCommandMap()->register("LevelSystem", new LevelCommand($this, "level", "Get player level information"));
     }
 
     /**
