@@ -12,8 +12,10 @@ use pocketmine\player\Player;
 
 class FormManager {
 
-    public function __construct(public static GenderSystem $plugin) {
-        // nope
+    public static LevelSystem $plugin;
+
+    public function __construct(LevelSystem $plugin) {
+        self::$plugin = $plugin;
     }
 
     public static function sendMenu(Player $player, Player $target): void {

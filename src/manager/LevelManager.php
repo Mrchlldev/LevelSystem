@@ -111,10 +111,10 @@ class LevelManager {
      * @param Player $player
      * @return int
      */
-    public static function getExpFormattedFromCache(Player $player): int {
+    public static function getExpFormattedFromCache(Player $player): string {
         $exp = 0;
         if (isset(self::$level_cache[$player->getName()])) {
-            $next_exp = number_format(self::$level_cache[$player->getName()]["exp"]);
+            $exp = number_format(self::$level_cache[$player->getName()]["exp"]);
         }
         return $exp;
     }
@@ -123,7 +123,7 @@ class LevelManager {
      * @param Player $player
      * @return int
      */
-    public static function getNextExpFromCache(Player $player): int {
+    public static function getNextExpFromCache(Player $player): string {
         $next_exp = 0;
         if (isset(self::$level_cache[$player->getName()])) {
             $next_exp = self::$level_cache[$player->getName()]["next_exp"];
@@ -135,7 +135,7 @@ class LevelManager {
      * @param Player $player
      * @return int
      */
-    public static function getNextExpFormattedFromCache(Player $player): int {
+    public static function getNextExpFormattedFromCache(Player $player): string {
         $next_exp = 0;
         if (isset(self::$level_cache[$player->getName()])) {
             $next_exp = number_format(self::$level_cache[$player->getName()]["next_exp"]);
@@ -179,7 +179,7 @@ class LevelManager {
             $next_exp = $rows[0]["next_exp"];
             if ($exp >= $next_exp) {
                 $level++;
-                $next_exp = $level * 1000 + mt_rand(0, 10) + mt_rand(0, 100);
+                $next_exp = $level + 1 * 1000 + mt_rand(1, 10) + mt_rand(10, 100) + mt_rand(1, 50);
                 $player->sendTitle("§aLevel Up!", "§e" . $rows[0]["level"] . " §b----> §e" . $level);
                 $player->sendToastNotification("§l§aLEVELUP!", "§eYou have leveled up to level " . $level);
                 self::sendReward($player);
@@ -248,6 +248,10 @@ class LevelManager {
         });
     }
 
+    /**
+     * @param Player $player
+     * @return void
+     */
     public static function sendReward(Player $player): void {
         foreach (self::$plugin->getConfig()->getNested("level.reward_command", []) as $command) {
             self::$plugin->getServer()->dispatchCommand(new ConsoleCommandSender(self::$plugin->getServer(), self::$plugin->getServer()->getLanguage()), str_replace("{player}", $player->getName(), $command));
