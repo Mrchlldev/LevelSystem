@@ -123,7 +123,7 @@ class LevelManager {
      * @param Player $player
      * @return int
      */
-    public static function getNextExpFromCache(Player $player): string {
+    public static function getNextExpFromCache(Player $player): int {
         $next_exp = 0;
         if (isset(self::$level_cache[$player->getName()])) {
             $next_exp = self::$level_cache[$player->getName()]["next_exp"];
