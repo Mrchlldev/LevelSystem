@@ -51,7 +51,7 @@ class EventListener implements Listener {
      */
     public function onPlayerJoin(PlayerJoinEvent $event): void {
         $player = $event->getPlayer();
-        LevelManager::addPlayerDataToCache($player, "Loading", "Loading", "Loading");
+        LevelManager::addPlayerDataToCache($player, "0", "0", "0");
         LevelManager::getDatas($player, function (?array $data) use ($player): void {
             if ($data == null) {
                 LevelManager::createData($player);
